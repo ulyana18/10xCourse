@@ -17,7 +17,7 @@ The file MUST following this naming convention:
 
 The file MUST be named in the format `YYYYMMDDHHmmss_short_description.sql` with proper casing for months, minutes, and seconds in UTC time:
 
-1. `YYYY` - Four digits for the year (e.g., `2024`).
+1. `YYYY` - Four digits for the year (e.g., `2025`).
 2. `MM` - Two digits for the month (01 to 12).
 3. `DD` - Two digits for the day of the month (01 to 31).
 4. `HH` - Two digits for the hour in 24-hour format (00 to 23).
