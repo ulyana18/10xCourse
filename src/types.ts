@@ -33,8 +33,8 @@ export type FlashcardReviewAction = "accept" | "reject" | "edit"
 export type FlashcardReview = {
   suggestion_id: number
   action: FlashcardReviewAction
-  front?: string
-  back?: string
+  front: string
+  back: string
 }
 
 export type ReviewFlashcardsCommand = {
