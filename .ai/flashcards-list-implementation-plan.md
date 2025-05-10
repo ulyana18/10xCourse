@@ -5,7 +5,7 @@ Endpoint `/api/flashcards` umożliwia pobranie listy fiszek użytkownika z obsł
 
 ## 2. Szczegóły żądania
 - Metoda HTTP: GET
-- Struktura URL: `/api/flashcards`
+- Struktura URL: `/api/flashcards/list`
 - Parametry Query:
   - Opcjonalne:
     - `page`: number (domyślnie: 1)
