@@ -36,6 +36,7 @@ This table is managed by Supabase Auth.
   - CHECK (source_text_length >= 1000 AND source_text_length <= 10000)
 - **generation_time**: TIMESTAMPTZ NOT NULL DEFAULT now()
 - **created_at**: TIMESTAMPTZ NOT NULL DEFAULT now()
+- **rejected_count**: INTEGER NOT NULL
 
 ### 1.4 FlashcardGenerationErrorLogs
 - **id**: BIGSERIAL PRIMARY KEY
