@@ -130,7 +130,8 @@ export async function reviewFlashcards(
       .from('flashcard_generation_sessions')
       .update({
         accepted_unedited_count: stats.accepted,
-        accepted_edited_count: stats.edited
+        accepted_edited_count: stats.edited,
+        rejected_count: stats.rejected
       })
       .eq('id', command.generation_id);
 

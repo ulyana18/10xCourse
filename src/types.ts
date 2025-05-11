@@ -78,7 +78,7 @@ export type GenerationStatisticsResponse = {
   total_generated: number
   accepted_unedited: number
   accepted_edited: number
-  rejected: number
+  rejected_count: number
 }
 
 export type GenerationErrorListParams = PaginationParams & {

@@ -76,6 +76,7 @@ export type Database = {
           generation_time: string
           id: number
           model: string
+          rejected_count: number
           source_text_hash: string
           source_text_length: number
           user_id: string
@@ -88,6 +89,7 @@ export type Database = {
           generation_time?: string
           id?: number
           model: string
+          rejected_count?: number
           source_text_hash: string
           source_text_length: number
           user_id: string
@@ -100,6 +102,7 @@ export type Database = {
           generation_time?: string
           id?: number
           model?: string
+          rejected_count?: number
           source_text_hash?: string
           source_text_length?: number
           user_id?: string
