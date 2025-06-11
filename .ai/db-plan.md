@@ -49,6 +49,23 @@ This table is managed by Supabase Auth.
 - **error_message**: TEXT NOT NULL
 - **created_at**: TIMESTAMPTZ NOT NULL DEFAULT now()
 
+### 1.5 FlashcardReviews
+- **id**: BIGSERIAL PRIMARY KEY
+- **user_id**: UUID NOT NULL REFERENCES Users(id) ON DELETE CASCADE
+- **flashcard_id**: BIGINT NOT NULL REFERENCES Flashcards(id) ON DELETE CASCADE
+- **rating**: INTEGER NOT NULL
+  - CHECK (rating >= 0 AND rating <= 5)
+- **next_review_date**: TIMESTAMPTZ NOT NULL
+- **ease_factor**: DECIMAL(4,2) NOT NULL DEFAULT 2.5
+  - CHECK (ease_factor >= 1.3 AND ease_factor <= 5.0)
+- **interval**: INTEGER NOT NULL DEFAULT 1
+  - CHECK (interval >= 1)
+- **review_count**: INTEGER NOT NULL DEFAULT 0
+  - CHECK (review_count >= 0)
+- **created_at**: TIMESTAMPTZ NOT NULL DEFAULT now()
+- **updated_at**: TIMESTAMPTZ NOT NULL DEFAULT now()
+- UNIQUE(user_id, flashcard_id)
+
 ## 2. Custom ENUM Types
 
 ### 2.1 flashcard_source
@@ -59,6 +76,8 @@ This table is managed by Supabase Auth.
 - One-to-Many: A user (Users) can have multiple flashcards (Flashcards).
 - One-to-Many: A user (Users) can have multiple flashcard generation sessions (FlashcardGenerationSessions).
 - One-to-Many: A user (Users) can have multiple flashcard generation error logs (FlashcardGenerationErrorLogs).
+- One-to-Many: A user (Users) can have multiple flashcard reviews (FlashcardReviews).
+- One-to-One: A flashcard (Flashcards) has one latest review (FlashcardReviews) per user.
 - The column `generation_id` in Flashcards references FlashcardGenerationSessions(id) to link flashcards with their generation session.
 
 ## 4. Indexes
@@ -67,6 +86,8 @@ This table is managed by Supabase Auth.
 - Index on Flashcards.user_id to improve query performance.
 - Index on FlashcardGenerationSessions.user_id and FlashcardGenerationSessions.source_text_hash.
 - Index on FlashcardGenerationErrorLogs.user_id and FlashcardGenerationErrorLogs.source_text_hash.
+- Index on FlashcardReviews(user_id, next_review_date) for efficient due card queries.
+- Index on FlashcardReviews.flashcard_id for relationship lookups.
 
 ## 5. Row-Level Security (RLS)
 

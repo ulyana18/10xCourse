@@ -4,6 +4,7 @@ import type { Database } from "./db/database.types"
 type FlashcardEntity = Database["public"]["Tables"]["flashcards"]["Row"]
 type GenerationSessionEntity = Database["public"]["Tables"]["flashcard_generation_sessions"]["Row"]
 type GenerationErrorEntity = Database["public"]["Tables"]["flashcard_generation_error_logs"]["Row"]
+type FlashcardReviewEntity = Database["public"]["Tables"]["flashcard_reviews"]["Row"]
 
 // Shared types
 export type PaginationParams = {
@@ -72,6 +73,25 @@ export type PaginatedResponse<T> = {
 export type FlashcardListResponse = PaginatedResponse<FlashcardDTO>
 
 export type UpdateFlashcardCommand = Partial<CreateFlashcardCommand>
+
+// Flashcard Review Types
+export type FlashcardReviewDTO = Pick<FlashcardReviewEntity, 
+  "id" | "flashcard_id" | "rating" | "next_review_date" | "ease_factor" | "interval" | "review_count">
+
+export type CreateFlashcardReviewCommand = {
+  flashcard_id: number
+  rating: number
+}
+
+export type FlashcardWithReviewDTO = FlashcardDTO & {
+  latest_review?: FlashcardReviewDTO
+}
+
+export type DueFlashcardsParams = PaginationParams & {
+  before_date?: string // ISO date string
+}
+
+export type DueFlashcardsResponse = PaginatedResponse<FlashcardWithReviewDTO>
 
 // Statistics Types
 export type GenerationStatisticsResponse = {

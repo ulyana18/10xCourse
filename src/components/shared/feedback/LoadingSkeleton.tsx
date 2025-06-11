@@ -19,8 +19,11 @@ const shimmerAnimation = {
   }
 };
 
-export function LoadingSkeleton() {
-  // Show 3 skeleton cards to represent loading state
+interface LoadingSkeletonProps {
+  count?: number;
+}
+
+export function LoadingSkeleton({ count = 3 }: LoadingSkeletonProps) {
   return (
     <motion.div 
       className="space-y-4"
@@ -43,7 +46,7 @@ export function LoadingSkeleton() {
         }
       }}
     >
-      {[1, 2, 3].map((index) => (
+      {Array.from({ length: count }, (_, index) => (
         <motion.div
           key={index}
           variants={skeletonVariants}

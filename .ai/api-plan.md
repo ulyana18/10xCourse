@@ -22,6 +22,11 @@
 - Tracks errors during flashcard generation
 - Stores error details and metadata for debugging and monitoring
 
+### 1.5 Flashcard Reviews
+- Maps to FlashcardReviews table
+- Stores spaced repetition data for each flashcard
+- Tracks review history and scheduling information
+
 ## 2. Endpoints
 
 ### 2.2 Flashcard Generation
@@ -179,6 +184,103 @@
 - Errors:
   - 404: Flashcard not found
 
+### 2.4 Flashcard Reviews
+
+#### Get Due Flashcards
+- Method: GET
+- Path: `/api/flashcards/due`
+- Description: Get flashcards due for review with pagination
+- Query Parameters:
+  - page: number (default: 1)
+  - per_page: number (default: 20)
+  - before_date: string (ISO date, optional)
+- Response: 200 OK
+```json
+{
+  "items": [
+    {
+      "id": "number",
+      "front": "string",
+      "back": "string",
+      "source": "string",
+      "created_at": "timestamp",
+      "updated_at": "timestamp",
+      "latest_review": {
+        "id": "number",
+        "flashcard_id": "number",
+        "rating": "number",
+        "next_review_date": "timestamp",
+        "ease_factor": "number",
+        "interval": "number",
+        "review_count": "number"
+      }
+    }
+  ],
+  "total": "number",
+  "page": "number",
+  "per_page": "number"
+}
+```
+- Errors:
+  - 400: Invalid query parameters
+
+#### Submit Review
+- Method: POST
+- Path: `/api/flashcards/{id}/review`
+- Description: Submit a review for a flashcard
+- Request Body:
+```json
+{
+  "rating": "number" // 0-5
+}
+```
+- Validation:
+  - rating: 0-5 range
+- Response: 200 OK
+```json
+{
+  "id": "number",
+  "flashcard_id": "number",
+  "rating": "number",
+  "next_review_date": "timestamp",
+  "ease_factor": "number",
+  "interval": "number",
+  "review_count": "number"
+}
+```
+- Errors:
+  - 404: Flashcard not found
+  - 400: Invalid rating
+
+#### Get Review History
+- Method: GET
+- Path: `/api/flashcards/{id}/reviews`
+- Description: Get review history for a flashcard
+- Query Parameters:
+  - page: number (default: 1)
+  - per_page: number (default: 20)
+- Response: 200 OK
+```json
+{
+  "items": [
+    {
+      "id": "number",
+      "flashcard_id": "number",
+      "rating": "number",
+      "next_review_date": "timestamp",
+      "ease_factor": "number",
+      "interval": "number",
+      "review_count": "number",
+      "created_at": "timestamp"
+    }
+  ],
+  "total": "number",
+  "page": "number",
+  "per_page": "number"
+}
+```
+- Errors:
+  - 404: Flashcard not found
 
 ### 2.5 Statistics
 
@@ -252,10 +354,15 @@
   - Front: max 200 characters
   - Back: max 500 characters
 - Study session:
-  - Retention score: 0-5 range
+  - Rating: 0-5 range
+- Reviews:
+  - Rating: 0-5 range
+  - Ease factor: 1.3-5.0 range
+  - Interval: minimum 1
 
 ### 4.2 Rate Limiting
 - Generation endpoints: 10 requests per hour
+- Review endpoints: 100 requests per minute
 - Other endpoints: 100 requests per minute
 
 ### 4.3 Error Handling
@@ -271,7 +378,7 @@
 ```
 
 ### 4.4 Business Logic Implementation
-- Spaced repetition algorithm integrated into study session endpoints
+- SuperMemo 2 spaced repetition algorithm for review scheduling
 - Generation statistics tracked automatically
 - Automatic validation of user ownership
 - GDPR compliance built into authentication endpoints 

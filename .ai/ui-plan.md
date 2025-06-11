@@ -27,9 +27,9 @@ Architektura interfejsu użytkownika została zaprojektowana z podejściem mobil
   - Kluczowe komponenty widoku: `FlashcardsList`, `Pagination`, `FilterBar` (multi-select zsynchronizowany z URL query params), `EditModal` oraz opcja usuwania.
   - UX, dostępność i względy bezpieczeństwa: Intuicyjna nawigacja, responsywność, pełna obsługa ARIA, zabezpieczenia operacji edycji i usuwania.
 
-- **Widok Tworzenia/Edycji Flashcarda (Create/Edit Flashcard)**
-  - Ścieżka: `/flashcard/create` lub `/flashcard/edit`
-  - Główny cel: Umożliwienie ręcznego tworzenia lub edycji flashcardów.
+- **Widok Tworzenia Flashcarda (Create Flashcard)**
+  - Ścieżka: `/flashcard/create`
+  - Główny cel: Umożliwienie ręcznego tworzenia flashcardów.
   - Kluczowe informacje do wyświetlenia: Formularz z polami "Front" oraz "Back", komunikaty walidacyjne, licznik znaków i progress bar.
   - Kluczowe komponenty widoku: `FlashcardForm` (z wykorzystaniem React Hook Form i Zod), przyciski „Zapisz” i „Anuluj”.
   - UX, dostępność i względy bezpieczeństwa: Natychmiastowa walidacja, czytelne komunikaty błędów, intuicyjna nawigacja.

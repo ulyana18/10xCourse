@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Check, X, Edit, CheckCircle2, XCircle } from "lucide-react"
-import type { FlashcardSuggestion } from "../types"
+import type { FlashcardSuggestion } from "../../types"
 import { motion, AnimatePresence } from "framer-motion"
 
 interface FlashcardSuggestionListProps {

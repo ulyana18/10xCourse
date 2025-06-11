@@ -150,6 +150,60 @@ export type Database = {
           },
         ]
       }
+      flashcard_reviews: {
+        Row: {
+          id: number
+          user_id: string
+          flashcard_id: number
+          rating: number
+          next_review_date: string
+          ease_factor: number
+          interval: number
+          review_count: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: number
+          user_id: string
+          flashcard_id: number
+          rating: number
+          next_review_date: string
+          ease_factor?: number
+          interval?: number
+          review_count?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: number
+          user_id?: string
+          flashcard_id?: number
+          rating?: number
+          next_review_date?: string
+          ease_factor?: number
+          interval?: number
+          review_count?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "flashcard_reviews_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "flashcard_reviews_flashcard_id_fkey"
+            columns: ["flashcard_id"]
+            isOneToOne: false
+            referencedRelation: "flashcards"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Views: {
       [_ in never]: never

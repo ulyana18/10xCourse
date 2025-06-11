@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { FlashcardsListView } from '../components/flashcards/FlashcardsListView';
+import { Toaster } from 'sonner';
+---
+
+<Layout title="Generate Flashcards">
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-8">My Flashcards</h1>
+    <FlashcardsListView client:load />
+    <Toaster richColors closeButton />
+  </main>
+</Layout> 

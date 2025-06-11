@@ -6,7 +6,7 @@ import type {
   ApiErrorResponse,
   ReviewFlashcardsCommand,
   ReviewFlashcardsResponse
-} from '../../types';
+} from '../../../types';
 
 export function useFlashcardGeneration() {
   const [isLoading, setIsLoading] = useState(false);
