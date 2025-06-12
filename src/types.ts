@@ -75,6 +75,11 @@ export type FlashcardListResponse = PaginatedResponse<FlashcardDTO>
 export type UpdateFlashcardCommand = Partial<CreateFlashcardCommand>
 
 // Flashcard Review Types
+export type GetFlashcardReviewsParams = PaginationParams & {
+  flashcardId: number
+  userId: string
+}
+
 export type FlashcardReviewDTO = Pick<FlashcardReviewEntity, 
   "id" | "flashcard_id" | "rating" | "next_review_date" | "ease_factor" | "interval" | "review_count">
 
